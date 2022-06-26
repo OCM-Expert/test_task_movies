@@ -81,7 +81,6 @@ class Genre(TimeStampedModel):
     def __str__(self):
         return f"{self.name}"
 
-
 class Person(TimeStampedModel):
     full_name = models.CharField(_("Полное имя"), max_length=255, blank=False)
     birth_date = models.DateField(_("Дата рождения"), blank=True)
