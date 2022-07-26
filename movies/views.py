@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import FilmWork
 
 def index(request):
-    return HttpResponse('Movies')
+    movies = FilmWork.objects.all()
+    return render(request, 'movies/index.html', {
+        'movies': movies
+    })

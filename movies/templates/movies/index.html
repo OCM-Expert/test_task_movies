@@ -1,0 +1,18 @@
+{% extends "movies/base.html" %}
+
+{% block title %}
+    All Movies
+{% endblock %}
+
+{% block content %}
+    <table>
+        {% for movie in movies %}
+            <tr><td>{{ movie.title }}</td><td>{{ movie.rating }}</td></tr>
+        {% endfor %}
+    </table>
+{#    <ul>#}
+{#        {% for movie in movies %}#}
+{#            <li>{{ movie.title }}</li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{% endblock %}
