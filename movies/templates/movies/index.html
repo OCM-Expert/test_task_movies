@@ -1,18 +1,22 @@
-{% extends "movies/base.html" %}
-
-{% block title %}
-    All Movies
-{% endblock %}
-
-{% block content %}
-    <table>
-        {% for movie in movies %}
-            <tr><td>{{ movie.title }}</td><td>{{ movie.rating }}</td></tr>
-        {% endfor %}
-    </table>
-{#    <ul>#}
-{#        {% for movie in movies %}#}
-{#            <li>{{ movie.title }}</li>#}
-{#        {% endfor %}#}
-{#    </ul>#}
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}All Movies{% endblock %}</title>
+{#    <script src="https://unpkg.com/vue@next" defer></script>#}
+{#    <script src="{% static 'js/app.js' %}"></script>#}
+    <link rel="stylesheet" href="{% static 'movies/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+        <table>
+            {% for movie in movies %}
+                <tr><td>{{ movie.title }}</td><td>{{ movie.rating }}</td></tr>
+            {% endfor %}
+        </table>
+        {% endblock %}
+    </div>
+</body>
+</html>
