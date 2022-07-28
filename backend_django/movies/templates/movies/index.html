@@ -12,6 +12,7 @@
     <div class="container">
         {% block content %}
         <table>
+            <tr><th>Title</th><th>Rating</th></tr>
             {% for movie in movies %}
                 <tr><td>{{ movie.title }}</td><td>{{ movie.rating }}</td></tr>
             {% endfor %}
