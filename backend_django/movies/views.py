@@ -1,7 +1,7 @@
-from .serializers import FilmWorkSerializer
+from .serializers import FilmWorkSerializer, GenreSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import FilmWork
+from .models import FilmWork, Genre
 
 class FilmWorksList(APIView):
     def get(self, request, format=None):
@@ -9,7 +9,11 @@ class FilmWorksList(APIView):
         serializer = FilmWorkSerializer(products, many=True)
         return Response(serializer.data)
 
-
+class GenresList(APIView):
+    def get(self, request, format=None):
+        genres = Genre.objects.all()
+        serializer = GenreSerializer(genres, many=True)
+        return Response(serializer.data)
 # def index(request):
 #     movies = getAllMovies()
 #     getMoviesByActor('Harrison Ford')
