@@ -5,7 +5,7 @@ from .models import FilmWork
 
 class FilmWorksList(APIView):
     def get(self, request, format=None):
-        products = FilmWork.objects.all()[0:4]
+        products = FilmWork.objects.all()[0:10]
         serializer = FilmWorkSerializer(products, many=True)
         return Response(serializer.data)
 
