@@ -6,16 +6,17 @@ from .selectors import *
 
 class FilmWorksList(APIView):
     def get(self, request, format=None):
-        genres = request.GET.getlist('genresToSelect[]')
-        if genres:
-            genre = genres[0]
+        genre = request.GET.get('genreToSelect')
+
+        print(genre)
+        if genre:
             genreID = Genre.objects.get(name=genre).id
             print(genreID)
             filmsByGenre = getFilmsByGenre(genreID)
             serializer = FilmWorkSerializer(filmsByGenre, many=True)
             return Response(serializer.data)
         else:
-            products = FilmWork.objects.all()[0:10]
+            products = FilmWork.objects.all()
             serializer = FilmWorkSerializer(products, many=True)
             return Response(serializer.data)
         # if genres:

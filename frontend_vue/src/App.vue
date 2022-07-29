@@ -1,14 +1,17 @@
 <template>
   <genres-list :allGenres="genres" @getActiveGenres="sortByGenres"></genres-list>
-  <p v-for="film in filmWorks" :key="film.id">{{film.title}}</p>
+  <film-works-list :film-works="filmWorks">
+  </film-works-list>
 </template>
 
 <script>
   import axios from 'axios'
   import GenresList from "@/components/GenresList";
+  import FilmWorksList from "@/components/FilmWorksList";
   export default {
     components: {
       GenresList,
+      FilmWorksList
     },
     data() {
       return {
@@ -45,11 +48,10 @@
           console.log(error);
         });
       },
-      async sortByGenres(activeGenres) {
-        console.log(activeGenres[0])
+      async sortByGenres(genre) {
         await axios
           .get('/api/v1/film-works-list', {
-            params: { genresToSelect: activeGenres }
+            params: { genreToSelect: genre }
           })
           .then(response => {
             this.filmWorks = response.data;

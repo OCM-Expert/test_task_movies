@@ -1,14 +1,15 @@
 <template>
 	<div class="genreSelecting">
 		<div class="genresContainer">
-			<div class="singleGenre"
+			<button
 			     v-for="genre in allGenres"
 			     :key="genre.name"
-			     @click="clickGenre(el, String(genre.name))">
+			     @click="submitActiveGenres(genre.name)"
+					 :class="genre.name in activeGenres ? 'activeGenre' : 'singleGenre'">
 				{{genre.name}}
-			</div>
+			</button>
 		</div>
-		<button @click="submitActiveGenres">Выбрать по жанрам</button>
+<!--		<button class="submit">Выбрать по жанрам</button>-->
 	</div>
 </template>
 
@@ -31,8 +32,9 @@
 					this.activeGenres.push(name);
 				}
 			},
-			submitActiveGenres() {
-				this.$emit('getActiveGenres', this.activeGenres);
+			submitActiveGenres(genre) {
+				console.log('asd');
+				this.$emit('getActiveGenres', genre);
 			}
 		},
 		emits: [
@@ -55,19 +57,16 @@
 		gap: 0.5rem;
 	}
 	.singleGenre {
-		border: gray 1px solid;
-		display: inline;
-		padding: 0.5rem 1rem;
-		border-radius: 5px;
-		cursor: pointer;
 	}
 	.activeGenre {
 		background-color: #42b983;
 		color: white;
 	}
 	button {
+		display: inline;
 		padding: 0.5rem 1rem;
 		border-radius: 5px;
+		cursor: pointer;
 		background-color: darkorchid;
 		color: white;
 		font-size: 1.2rem;
