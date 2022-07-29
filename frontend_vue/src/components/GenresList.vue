@@ -59,6 +59,7 @@
 		display: inline;
 		padding: 0.5rem 1rem;
 		border-radius: 5px;
+		cursor: pointer;
 	}
 	.activeGenre {
 		background-color: #42b983;

@@ -1,5 +1,6 @@
 <template>
   <genres-list :allGenres="genres" @getActiveGenres="sortByGenres"></genres-list>
+  <p v-for="film in filmWorks" :key="film.id">{{film.title}}</p>
 </template>
 
 <script>
@@ -45,13 +46,13 @@
         });
       },
       async sortByGenres(activeGenres) {
-        console.log(activeGenres)
+        console.log(activeGenres[0])
         await axios
-          .get('/api/v1/genres-list', {
+          .get('/api/v1/film-works-list', {
             params: { genresToSelect: activeGenres }
           })
           .then(response => {
-            console.log(response.data);
+            this.filmWorks = response.data;
           })
           .catch(error => {
             console.log(error);

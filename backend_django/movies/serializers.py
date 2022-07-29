@@ -12,8 +12,6 @@ class FilmWorkSerializer(serializers.ModelSerializer):
             'file_path',
             'rating',
             'type',
-            'genres',
-            'persons'
         )
 
 class GenreSerializer(serializers.ModelSerializer):
