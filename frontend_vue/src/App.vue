@@ -1,22 +1,29 @@
 <template>
-  <genres-list :allGenres="genres" @getActiveGenres="sortByGenres"></genres-list>
-  <film-works-list :film-works="filmWorks">
-  </film-works-list>
+  <genres-list :allGenres="genres" @getActiveGenres="sortByGenre"></genres-list>
+  <search-form @searchByActor="sortByActor"></search-form>
+  <film-works-list v-if="filmWorks.length !== 0" :film-works="filmWorks"></film-works-list>
+  <p v-if="filmWorks.length === 0">Фильмы не найдены</p>
+<!--  <actors-list :allActors="actors"></actors-list>-->
 </template>
 
 <script>
   import axios from 'axios'
   import GenresList from "@/components/GenresList";
   import FilmWorksList from "@/components/FilmWorksList";
+  import ActorsList from "@/components/ActorsList";
+  import SearchForm from "@/components/SearchForm";
   export default {
     components: {
       GenresList,
-      FilmWorksList
+      FilmWorksList,
+      ActorsList,
+      SearchForm
     },
     data() {
       return {
         filmWorks: [],
-        genres: []
+        genres: [],
+        actors: []
       }
     },
     created() {
@@ -34,13 +41,19 @@
             console.log(error);
           });
       },
+      async getActors() {
+        await axios
+          .get('/api/v1/actors-list')
+          .then(response => {
+            this.actors = response.data;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      },
       async getFilmWorks() {
         await axios
-        .get('/api/v1/film-works-list', {
-          params: {
-            whatToGet: 'filmWorks'
-          }
-        })
+        .get('/api/v1/film-works-list')
         .then(response => {
           this.filmWorks = response.data;
         })
@@ -48,10 +61,23 @@
           console.log(error);
         });
       },
-      async sortByGenres(genre) {
+      async sortByGenre(genre) {
         await axios
           .get('/api/v1/film-works-list', {
             params: { genreToSelect: genre }
+          })
+          .then(response => {
+            this.filmWorks = response.data;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      },
+      async sortByActor(actor) {
+        console.log(actor);
+        await axios
+          .get('/api/v1/film-works-list', {
+            params: { actorToSelect: actor }
           })
           .then(response => {
             this.filmWorks = response.data;
@@ -118,24 +144,10 @@
     font-size: 1.5rem;
   }
 
-  tbody {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 2rem;
+  p {
+    text-align: center;
+    color: red;
+    font-size: 1.2rem;
+    font-family: 'Open Sans', 'Lato', sans-serif;
   }
-
-  tr {
-    display: flex;
-    justify-content: space-between;
-    background: lightcyan;
-    padding: 1rem;
-    border-radius: 8px;
-  }
-
-  tr:nth-of-type(2n) {
-    background: aliceblue;
-  }
-
-
 </style>

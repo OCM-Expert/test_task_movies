@@ -33,7 +33,6 @@
 				}
 			},
 			submitActiveGenres(genre) {
-				console.log('asd');
 				this.$emit('getActiveGenres', genre);
 			}
 		},
@@ -45,7 +44,7 @@
 
 <style scoped>
 	.genreSelecting {
-		padding: 5rem 10rem;
+		padding: 5rem 10rem 2.5rem 10rem;
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
@@ -69,7 +68,6 @@
 		cursor: pointer;
 		background-color: darkorchid;
 		color: white;
-		font-size: 1.2rem;
 		align-self: flex-end;
 	}
 </style>
