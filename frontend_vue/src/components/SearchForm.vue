@@ -57,9 +57,9 @@
 	}
 
 	label {
-		font-weight: bold;
 		display: block;
 		margin-bottom: 0.5rem;
+		font-family: 'Open Sans', 'Lato', sans-serif;
 	}
 	input,
 	textarea {

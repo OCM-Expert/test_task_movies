@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import FilmWork, Genre,  Person
 from .selectors import *
+from django.http import JsonResponse
 
 class FilmWorksList(APIView):
     def get(self, request, format=None):
@@ -37,6 +38,13 @@ class GenresList(APIView):
         return Response(serializer.data)
 
 
+class Ratings(APIView):
+    def get(self, request, format=None):
+        ratings = getRatings()
+        serializer = RatingsSerializer(ratings, many=True)
+        return Response(serializer.data)
+
+
 class ActorsList(APIView):
     def get(self, request, format=None):
         actors = Person.objects.all()
@@ -49,3 +57,10 @@ def getPersonId(actor):
         return Person.objects.get(full_name=actor)
     except Person.DoesNotExist:
         return False
+
+
+def RatingsPopularity(request):
+    # do something with the your data
+    data = getRatings()
+    # just return a JsonResponse
+    return JsonResponse(data)

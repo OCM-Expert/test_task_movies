@@ -2,7 +2,7 @@
 	<div class="filmWorksContainer">
 		<div class="filmWorksList">
 			<div class="singleFilm" v-for="film in filmWorks" :key="film.id">
-				{{film.title}}
+				{{film.title}} - {{film.rating}}
 			</div>
 		</div>
 	</div>

@@ -31,3 +31,15 @@ def getFilmsByActor(actor):
         if film['id'] in filmIDs:
             films.append(film)
     return films
+
+
+def getRatings():
+    result = {}
+    allFilms = list(FilmWork.objects.exclude(rating=None).values())
+    for film in allFilms:
+        rating = film["rating"]
+        if rating in result:
+            result[rating] += 1
+        else:
+            result[rating] = 1
+    return result

@@ -1,9 +1,13 @@
 <template>
+  <div class="charts">
+    <div>
+      <canvas id="bar-chart"></canvas>
+    </div>
+  </div>
   <genres-list :allGenres="genres" @getActiveGenres="sortByGenre"></genres-list>
   <search-form @searchByActor="sortByActor"></search-form>
   <film-works-list v-if="filmWorks.length !== 0" :film-works="filmWorks"></film-works-list>
   <p v-if="filmWorks.length === 0">Фильмы не найдены</p>
-<!--  <actors-list :allActors="actors"></actors-list>-->
 </template>
 
 <script>
@@ -12,18 +16,21 @@
   import FilmWorksList from "@/components/FilmWorksList";
   import ActorsList from "@/components/ActorsList";
   import SearchForm from "@/components/SearchForm";
+  import Charts from "@/components/Charts";
   export default {
     components: {
       GenresList,
       FilmWorksList,
       ActorsList,
-      SearchForm
+      SearchForm,
+      Charts
     },
     data() {
       return {
         filmWorks: [],
         genres: [],
-        actors: []
+        actors: [],
+        ratings: []
       }
     },
     created() {
@@ -149,5 +156,9 @@
     color: red;
     font-size: 1.2rem;
     font-family: 'Open Sans', 'Lato', sans-serif;
+  }
+
+  .charts {
+    padding: 0 10rem;
   }
 </style>
