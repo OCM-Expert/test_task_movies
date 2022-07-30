@@ -58,7 +58,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'mysite.urls'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080"
+    "http://localhost:8080",
+    "http://192.168.1.28:8080"
 ]
 
 TEMPLATES = [
