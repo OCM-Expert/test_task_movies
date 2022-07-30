@@ -1,7 +1,10 @@
 <template>
   <div class="charts">
-    <div>
-      <canvas id="bar-chart"></canvas>
+    <div class="chart">
+      <canvas id="ratings-chart"></canvas>
+    </div>
+    <div class="chart">
+      <canvas id="genres-chart"></canvas>
     </div>
   </div>
   <genres-list :allGenres="genres" @getActiveGenres="sortByGenre"></genres-list>
@@ -16,14 +19,12 @@
   import FilmWorksList from "@/components/FilmWorksList";
   import ActorsList from "@/components/ActorsList";
   import SearchForm from "@/components/SearchForm";
-  import Charts from "@/components/Charts";
   export default {
     components: {
       GenresList,
       FilmWorksList,
       ActorsList,
-      SearchForm,
-      Charts
+      SearchForm
     },
     data() {
       return {
@@ -159,6 +160,14 @@
   }
 
   .charts {
-    padding: 0 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
+
+  .chart {
+    width: 50%;
+    margin: auto;
+  }
+
 </style>

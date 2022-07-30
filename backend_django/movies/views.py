@@ -38,13 +38,6 @@ class GenresList(APIView):
         return Response(serializer.data)
 
 
-class Ratings(APIView):
-    def get(self, request, format=None):
-        ratings = getRatings()
-        serializer = RatingsSerializer(ratings, many=True)
-        return Response(serializer.data)
-
-
 class ActorsList(APIView):
     def get(self, request, format=None):
         actors = Person.objects.all()
@@ -61,6 +54,11 @@ def getPersonId(actor):
 
 def RatingsPopularity(request):
     # do something with the your data
-    data = getRatings()
+    data = getRatingsPopularity()
     # just return a JsonResponse
+    return JsonResponse(data)
+
+
+def GenresPopularity(request):
+    data = getGenresPopularity()
     return JsonResponse(data)

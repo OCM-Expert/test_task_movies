@@ -44,7 +44,7 @@
 
 <style scoped>
 	.genreSelecting {
-		padding: 5rem 10rem 2.5rem 10rem;
+		padding: 5rem 20rem 2.5rem 20rem;
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;

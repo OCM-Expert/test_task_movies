@@ -1,6 +1,9 @@
 import uuid
 from .models import PersonFilmWork, FilmWork, GenreFilmWork,Genre
 
+class GenreIDPopularity:
+    genreID = ''
+    popularity = 0
 
 def getFilmsByGenre(genre):
     allGenreFilmWork = list(GenreFilmWork.objects.all().values())
@@ -33,7 +36,7 @@ def getFilmsByActor(actor):
     return films
 
 
-def getRatings():
+def getRatingsPopularity():
     result = {}
     allFilms = list(FilmWork.objects.exclude(rating=None).values())
     for film in allFilms:
@@ -42,4 +45,24 @@ def getRatings():
             result[rating] += 1
         else:
             result[rating] = 1
+    return result
+
+def getGenresPopularity():
+    result = {}
+    allGenres = list(Genre.objects.all().values())
+    allGenresIDs = []
+    genreIDPopularity = {}
+    for genre in allGenres:
+        genreID = genre['id']
+        allGenresIDs.append(genreID)
+        genreIDPopularity[genreID] = 0
+    allGenresFilmWorks = list(GenreFilmWork.objects.all().values())
+    for genreFilmWork in allGenresFilmWorks:
+        genreID = genreFilmWork['genre_id_id']
+        filmWorkID = genreFilmWork['film_work_id_id']
+        genreIDPopularity[genreID] += 1
+
+    genreUUID = uuid.UUID(str('56b541ab-4d66-4021-8708-397762bff2d4'))
+    for genre in allGenres:
+        result[genre['name']] = genreIDPopularity[genre['id']]
     return result
